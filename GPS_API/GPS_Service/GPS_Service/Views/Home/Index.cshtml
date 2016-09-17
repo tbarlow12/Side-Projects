@@ -1,0 +1,68 @@
+﻿@model IEnumerable<GPS_Service.Models.Course>
+@{
+    ViewBag.Title = "Home";
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/knockout")
+    <script type="text/javascript">
+        function CoursesViewModel() {
+            var self = this;
+            self.courses = ko.observableArray([]);
+            self.addCourse = function () {
+                $.post("api/courses",
+                    $("#addCourse").serialize(),
+                    function (value) {
+                        self.courses.push(value);
+                    },
+                    "json");
+            }
+            self.removeCourse = function (course) {
+                $.ajax({
+                    type: "DELETE",
+                    url: course.Self,
+                    success: function () {
+                        self.courses.remove(course);
+                    }
+                });
+            }
+
+            $.getJSON("api/courses", function (data) {
+                self.courses(data);
+            });
+        }
+        ko.applyBindings(new CoursesViewModel());
+    </script>
+}
+<ul id="courses" data-bind="foreach: courses">
+    <li class="ui-widget-content ui-corner-all">
+        <h1 data-bind="text: Name" class="ui-widget-header"></h1>
+        <div><span data-bind="text: $data.Name || 'Name?'"></span></div>
+        <div>
+            <span data-bind="text: $data.Professor || 'Professor?'"></span>,
+            <span data-bind="text: $data.Catalog || 'Catalog?'"></span>
+        </div>
+        <div data-bind="if: $data.Email"><a data-bind="attr: { href: 'mailto:' + Email }, text: Email"></a></div>
+        <div data-bind="ifnot: $data.Email"><span>Email?</span></div>
+        <p><a data-bind="attr: { href: Self }, click: $root.removeCourse" class="removeCourse ui-state-default ui-corner-all">Remove</a></p>
+    </li>
+</ul>
+<form id="addCourse" data-bind="submit: addCourse">
+    <fieldset>
+        <legend>Add New Course</legend>
+        <ol>
+            <li>
+                <label for="Name">Name</label>
+                <input type="text" name="Name" />
+            </li>
+            <li>
+                <label for="Professor">Professor</label>
+                <input type="text" name="Professor">
+            </li>
+            <li>
+                <label for="Catalog">Catalog</label>
+                <input type="text" name="Catalog" />
+            </li>
+        </ol>
+        <input type="submit" value="Add" />
+    </fieldset>
+</form>
