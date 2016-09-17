@@ -1,0 +1,51 @@
+Hey Mom, Welcome to your AskD Program :)
+
+I tried to make it as simple as possible to use, but I'll try and walk you through it
+a little bit with some examples.
+
+-----------
+  USAGE
+-----------
+
+Each file MUST have an index and a title. All of the other attributes (author, type,
+tags and comments) are optional. A type is like poem, book, story, joke, handout, etc. 
+You'll be able to search your files by these attributes (except for comments), so the
+more information you give, the easier you'll be able to find it. You'll be able to
+update or delete any of the files by selecting them from the list on the right-hand
+side and clicking the buttons to "Edit" or "Delete" the selected file. You'll know
+which file you're updating/deleting by looking at the preview pane in the bottom right
+hand corner.
+
+An example might help. Let's say you wanted to add a poem about Christmas, but you'd 
+also like to be able to find it by searching for "charity" and "gifts." You'll add 
+the index yourself (I was going to auto-generate that, but that should be the index 
+of the file in your filing cabinet). You'd enter the info like this:
+
+Index:(Index number from your file)
+Title:(Whatever the title is)
+Author:(Whoever the author is)
+Type: poem
+Tags: Christmas, charity, gifts
+(You could attach a file if you'd like by clicking the button, finding and selecting
+the file from a new window)
+Add any comments you'd like to have, and hit "Add File." You should get a message back
+saying that the file was created successfully. You'll also see the file and its attributes
+in the different windows of the program.
+
+-------------
+  FEATURES
+-------------
+
+In the File Menu, you'll find the "Usage", "Import", and "Export" commands. Import is
+more for data-safety purposes. If you wanted to add a bunch of files in bulk, you could
+use a text file and import all of it at the same time. I doubt you'll need to use it 
+much or ever, I just wanted to add it just in case. The export is something that might
+be nice to do every once in a while. It just sends all of the data in the database to
+a text file (just as a back up). I might throw in an auto-backup feature, but I thought
+I'd get this deployed and let you use it to see if there are other features that you'd
+like to have.
+
+Let me know if you have any questions, or if there are any other features you'd like to
+have in it. Have fun :) Love ya!
+
+-Tanner
