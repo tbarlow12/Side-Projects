@@ -1,0 +1,27 @@
+﻿Rules
+
+Name-(Number of courses required)/Course1,Course2,Course3
+Example:
+Theory-1/CS_3100,CS_3200
+
+Course_Number
+Example: CS 2420
+CS_2420
+
+Wild Card: *
+Example: Any CS Course
+CS_*
+Any major, any course
+*_*
+
+Course range
+Example: Any upper division CS course
+CS_*>3000<5999
+
+Tags(Like bachelor's degree requirement) 
+Example: Any fine arts course
+*_*?FF
+
+Exclude course from range
+Example: Any upper division math course except MATH 3010
+MATH_*>3000<5999!MATH_3010
