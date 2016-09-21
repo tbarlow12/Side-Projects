@@ -20,17 +20,7 @@ public class Organizer {
         */
     }
 
-    public void connectToDatabase(){
-        Connection c = null;
-        try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:organizer.db");
-        } catch ( Exception e ) {
-            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-            System.exit(0);
-        }
-        System.out.println("Opened database successfully");
-    }
+
 
     public void captureFileState(String path){
         MyFile root = new MyFile(path);

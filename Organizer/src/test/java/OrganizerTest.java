@@ -16,8 +16,10 @@ public class OrganizerTest {
 
     @org.junit.Test
     public void connectToDatabase() throws Exception {
-        Organizer o = new Organizer();
-        o.connectToDatabase();
+        LocalDB db = new LocalDB();
+        db.connectToDatabase();
+       // db.closeConnection();
+
     }
 
     @org.junit.Test
