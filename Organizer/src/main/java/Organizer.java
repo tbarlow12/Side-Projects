@@ -14,6 +14,7 @@ import java.nio.file.attribute.BasicFileAttributeView;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileTime;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class Organizer {
     public Organizer(){
@@ -27,24 +28,33 @@ public class Organizer {
     }
     
     public void organize(String path){
-        File rootFolder = new File(path);
+        MyFile rootFolder = new MyFile(path);
         organizeRecursive(rootFolder);
     }
 
-    private void organizeRecursive(File directory) {
+    private void organizeRecursive(MyFile directory) {
         File[] files = directory.listFiles();
         for(int i = 0; i < files.length; i++){
             File f = files[i];
-            if(f.isDirectory()){
-                organizeRecursive(f);
-            }else if(f.isFile()){
-                processFile(f);
+            MyFile m = new MyFile(f);
+            if(m.isDirectory()){
+                organizeRecursive(m);
+            }else if(m.isFile()){
+                processFile(m);
             }
         }
     }
 
-    private void processFile(File f) {
+    private void processFile(MyFile f) {
         BasicFileAttributes attr = getAttributes(f);
+        FileTime date = attr.creationTime();
+        Calendar c = Calendar.getInstance();
+        c.setTimeInMillis(date.toMillis());
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH) + 1;
+        String m = getMonth(month);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+        System.out.println(f.getName() + " " + year + " " + m + " " + day);
     }
 
     private static BasicFileAttributes getAttributes(File f) {
