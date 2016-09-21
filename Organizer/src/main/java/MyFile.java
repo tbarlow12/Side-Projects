@@ -14,17 +14,43 @@ public class MyFile extends File {
     private String oldPath;
     private String newPath;
     private MyDate date;
+    private String extension;
     private ArrayList<MyFile> myFiles;
+
+    public String getOldPath() {
+        return oldPath;
+    }
+
+    public String getNewPath() {
+        return newPath;
+    }
+
+    public MyDate getDate() {
+        return date;
+    }
+
+    public ArrayList<MyFile> getMyFiles() {
+        return myFiles;
+    }
+
+    public String getExtension(){return extension; }
 
     public MyFile(String pathname) {
         super(pathname);
         oldPath = pathname;
         BasicFileAttributes attr = getAttributes();
         date = getDate(attr);
+        if(this.isFile()){
+            int extLocation = this.getName().lastIndexOf('.');
+            if(extLocation > 0)
+                extension = this.getName().substring(extLocation);
+        }
         File[] files = this.listFiles();
         myFiles = new ArrayList<MyFile>();
-        for(int i = 0; i < files.length; i++){
-            myFiles.add(new MyFile(files[i]));
+        if(files != null){
+            for(int i = 0; i < files.length; i++){
+                myFiles.add(new MyFile(files[i]));
+            }
         }
     }
 
