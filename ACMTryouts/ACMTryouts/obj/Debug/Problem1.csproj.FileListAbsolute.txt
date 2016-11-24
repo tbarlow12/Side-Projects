@@ -1,0 +1,6 @@
+C:\Users\Tanner\Documents\GitHub\Side-Projects\ACMTryouts\ACMTryouts\bin\Debug\ACMTryouts.exe.config
+C:\Users\Tanner\Documents\GitHub\Side-Projects\ACMTryouts\ACMTryouts\bin\Debug\ACMTryouts.exe
+C:\Users\Tanner\Documents\GitHub\Side-Projects\ACMTryouts\ACMTryouts\bin\Debug\ACMTryouts.pdb
+C:\Users\Tanner\Documents\GitHub\Side-Projects\ACMTryouts\ACMTryouts\obj\Debug\Problem1.csprojResolveAssemblyReference.cache
+C:\Users\Tanner\Documents\GitHub\Side-Projects\ACMTryouts\ACMTryouts\obj\Debug\ACMTryouts.exe
+C:\Users\Tanner\Documents\GitHub\Side-Projects\ACMTryouts\ACMTryouts\obj\Debug\ACMTryouts.pdb
