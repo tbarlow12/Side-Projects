@@ -3,7 +3,7 @@ import java.util.Calendar;
 /**
  * Created by Tanner on 9/20/2016.
  */
-public class MyDate {
+class MyDate {
     private int year;
     private int month;
     private String monthString;
@@ -13,7 +13,7 @@ public class MyDate {
     private int second;
     private int millisecond;
 
-    public MyDate(Calendar c) {
+    MyDate(Calendar c) {
         year = c.get(Calendar.YEAR);
         this.month = c.get(Calendar.MONTH) + 1;
         this.monthString = convertMonthString(this.month);
@@ -24,11 +24,11 @@ public class MyDate {
         this.millisecond = c.get(Calendar.MILLISECOND);
     }
 
-    public int getYear() {
+    int getYear() {
         return year;
     }
 
-    public int getMonth() {
+    int getMonth() {
         return month;
     }
 
@@ -36,15 +36,15 @@ public class MyDate {
         return monthString;
     }
 
-    public int getDay() {
+    int getDay() {
         return day;
     }
 
-    public int getHour() {
+    int getHour() {
         return hour;
     }
 
-    public int getMinute() {
+    int getMinute() {
         return minute;
     }
 

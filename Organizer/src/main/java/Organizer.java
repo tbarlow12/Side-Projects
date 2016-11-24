@@ -29,7 +29,7 @@ public class Organizer {
 
 
     }
-
+    
     private void organizeRecursive(MyFile directory, int level) {
         ArrayList<MyFile> myFiles = directory.getMyFiles();
         for(int i = 0; i < myFiles.size(); i++){

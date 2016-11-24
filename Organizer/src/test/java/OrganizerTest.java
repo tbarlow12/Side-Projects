@@ -20,6 +20,7 @@ public class OrganizerTest {
     public void connectToDatabase() throws Exception {
         LocalDB db = new LocalDB();
         db.connectToDatabase();
+
        // db.closeConnection();
 
     }
