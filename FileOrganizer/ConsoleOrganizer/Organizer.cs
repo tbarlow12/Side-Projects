@@ -67,7 +67,6 @@ namespace ConsoleOrganizer
                 }
             }
             return result;
-
         }
     }
 }

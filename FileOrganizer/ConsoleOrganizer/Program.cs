@@ -10,7 +10,7 @@ namespace ConsoleOrganizer
     {
         static void Main(string[] args)
         {
-            Organizer.Organize(@"C:\Users\Tanner\Google Drive", @"C:\Users\Tanner\Pictures\OrganizerTest", new List<string> { ".jpg" });
+            Organizer.Organize(@"C:\Users\Tanner\Pictures", @"C:\Users\Tanner\Pictures\OrganizerTest", new List<string> { ".jpg" });
         }
     }
 }
