@@ -1,0 +1,9 @@
+C:\Users\Tanner\Documents\GitHub\Side-Projects\ScriptureScraper\ScriptureScraper\bin\Debug\ScriptureScraper.exe.config
+C:\Users\Tanner\Documents\GitHub\Side-Projects\ScriptureScraper\ScriptureScraper\bin\Debug\ScriptureScraper.exe
+C:\Users\Tanner\Documents\GitHub\Side-Projects\ScriptureScraper\ScriptureScraper\bin\Debug\ScriptureScraper.pdb
+C:\Users\Tanner\Documents\GitHub\Side-Projects\ScriptureScraper\ScriptureScraper\bin\Debug\HtmlAgilityPack.dll
+C:\Users\Tanner\Documents\GitHub\Side-Projects\ScriptureScraper\ScriptureScraper\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\Tanner\Documents\GitHub\Side-Projects\ScriptureScraper\ScriptureScraper\bin\Debug\HtmlAgilityPack.xml
+C:\Users\Tanner\Documents\GitHub\Side-Projects\ScriptureScraper\ScriptureScraper\obj\Debug\ScriptureScraper.csprojResolveAssemblyReference.cache
+C:\Users\Tanner\Documents\GitHub\Side-Projects\ScriptureScraper\ScriptureScraper\obj\Debug\ScriptureScraper.exe
+C:\Users\Tanner\Documents\GitHub\Side-Projects\ScriptureScraper\ScriptureScraper\obj\Debug\ScriptureScraper.pdb
