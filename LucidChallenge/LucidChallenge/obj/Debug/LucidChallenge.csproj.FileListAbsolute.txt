@@ -1,0 +1,6 @@
+C:\Users\Tanner\Documents\GitHub\Side-Projects\LucidChallenge\LucidChallenge\bin\Debug\LucidChallenge.exe.config
+C:\Users\Tanner\Documents\GitHub\Side-Projects\LucidChallenge\LucidChallenge\bin\Debug\LucidChallenge.exe
+C:\Users\Tanner\Documents\GitHub\Side-Projects\LucidChallenge\LucidChallenge\bin\Debug\LucidChallenge.pdb
+C:\Users\Tanner\Documents\GitHub\Side-Projects\LucidChallenge\LucidChallenge\obj\Debug\LucidChallenge.csprojResolveAssemblyReference.cache
+C:\Users\Tanner\Documents\GitHub\Side-Projects\LucidChallenge\LucidChallenge\obj\Debug\LucidChallenge.exe
+C:\Users\Tanner\Documents\GitHub\Side-Projects\LucidChallenge\LucidChallenge\obj\Debug\LucidChallenge.pdb
