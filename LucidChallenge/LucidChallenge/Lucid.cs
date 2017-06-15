@@ -11,61 +11,71 @@ namespace LucidChallenge
         static void Main(string[] args)
         {
             var grid = ReadGrid();
-            Console.WriteLine(FindSubSequence(grid));
+            var longest_path = FindLongestPath(grid);
         }
 
-        private static int FindSubSequence(int[][] grid)
+        private static int FindLongestPath(int[][] grid)
         {
-            var queue = new Queue<int[]>();
-            int longest_path_length = 0;
-            for (int row = 0; row < grid.Length; row++)
-                for (int col = 0; col < grid[row].Length; col++)
-                {
-                    var first = new int[] { row, col };
-                    HashSet<int[]> visited = new HashSet<int[]> { first };
-                    queue.Enqueue(first);
-                    int path_length = 0;
-                    while(queue.Count != 0)
-                    {
-                        var coords = queue.Dequeue();
-                        queue.TryAddNeighbor(visited, grid, grid[row][col], coords[0] - 1, coords[1], 3);
-                        queue.TryAddNeighbor(visited, grid, grid[row][col], coords[0] + 1, coords[1], 3);
-                        queue.TryAddNeighbor(visited, grid, grid[row][col], coords[0], coords[1] - 1, 3);
-                        queue.TryAddNeighbor(visited, grid, grid[row][col], coords[0], coords[1] + 1, 3);
-                        path_length++;
-                    }
-                    if (path_length > longest_path_length)
-                        longest_path_length = path_length;
-                }
-            return longest_path_length;
-        }
-
-        private static void TryAddNeighbor(this Queue<int[]> queue, HashSet<int[]> visited, int[][] grid, int original_value, int row, int col, int minDiff)
-        {
-            if ((row >= 0 && row < grid.Length) && (col >= 0 && col < grid[row].Length))
+            for(int i = 0; i < grid.Length; i++)
             {
-                if (Math.Abs(grid[row][col] - original_value) >= minDiff)
+                for (int j = 0; j < grid[i].Length; j++)
                 {
-                    var coords = new int[] { row, col };
-                    if (!visited.ValContains(coords))
+                    Stack<int[]> stack = new Stack<int[]>();
+                    stack.Push(new int[] { i, j });
+                    List<Tuple<int, int>> explored = new List<Tuple<int, int>>();
+                    var longest_path = 0;
+                    var path_length = 1;
+                    while(stack.Count > 0)
                     {
-                        queue.Enqueue(coords);
-                        visited.Add(coords);
+                        var coords = stack.Peek();
+                        int row = coords[0];
+                        int col = coords[1];
+
+                        int original_count = stack.Count;
+                        //push neighbors if they satisfy requirement
+                        stack.PushIfSatisfy(grid[row][col], row - 1, col - 1, grid);
+                        stack.PushIfSatisfy(grid[row][col], row - 1, col, grid);
+                        stack.PushIfSatisfy(grid[row][col], row - 1, col + 1, grid);
+                        stack.PushIfSatisfy(grid[row][col], row, col - 1, grid);
+                        stack.PushIfSatisfy(grid[row][col], row, col + 1, grid);
+                        stack.PushIfSatisfy(grid[row][col], row + 1, col - 1, grid);
+                        stack.PushIfSatisfy(grid[row][col], row + 1, col, grid);
+                        stack.PushIfSatisfy(grid[row][col], row + 1, col + 1, grid);
+                        if (stack.Count > original_count)
+                            path_length++;
+                        else
+                        {
+                            stack.Pop();
+                            longest_path = Math.Max(longest_path, path_length);
+                            path_length--;
+                        }
+                        //record biggest length so far
                     }
                 }
             }
+            return 0;
         }
 
-        private static bool ValContains(this HashSet<int[]> set, int[] item)
+        private static bool PushIfSatisfy(this Stack<int[]> stack,int val, int row, int col, int[][] grid)
         {
-            foreach (var set_item in set)
-            {
-                if (Enumerable.SequenceEqual(set_item, item))
-                    return true;
+            var coords = new int[] { row, col };
+            if (row >= 0 && row < grid.Length && col >= 0 && col < grid[row].Length && Math.Abs(val - grid[row][col]) >= 3)
+            { 
+                stack.Push(coords);
+                return true;
             }
             return false;
         }
-
+        private static bool HasPath(this List<List<int>> paths, List<int> path, int newVal)
+        {
+            foreach(List<int> p in paths)
+            {
+                List<int> temp = p.ToList();
+                temp.Add(newVal);
+                if (temp.SequenceEqual(path)) return true;
+            }
+            return false;
+        }
 
         private static int[][] ReadGrid()
         {
@@ -73,12 +83,14 @@ namespace LucidChallenge
             Console.ReadLine(); //skip the first line
             string line;
             while((line = Console.ReadLine()) != null && line != "")
-            {
-                int[] rowOfNumbers = Array.ConvertAll(line.Split(), s=> int.Parse(s));
-                lines.Add(rowOfNumbers);
-            }
+                lines.Add(Array.ConvertAll(line.Split(), s=> int.Parse(s)));
             return lines.ToArray();
         }
+    }
+    class Node<T>
+    {
+        public List<Node<T>> Nodes { get; set; }
+        public T Value { get; set; }
     }
 
 }
