@@ -53,14 +53,67 @@ namespace ConsoleOrganizer
 
         private static void CopyPaths(Dictionary<int, Dictionary<int, List<string>>> paths, string target_path)
         {
-            throw new NotImplementedException();
+            var path_count = GetPathCount(paths);
+            foreach(var year_kvp in paths)
+            {
+                int year = year_kvp.Key;
+                var year_dict = year_kvp.Value;
+                foreach(var month_kvp in year_dict)
+                {
+                    int month = month_kvp.Key;
+                    var path_list = month_kvp.Value;
+                    double i = 1;
+                    foreach(var path in path_list)
+                    {
+                        var name = Path.GetFileNameWithoutExtension(path);
+                        var ext = Path.GetExtension(path);
+                        var new_dir = string.Format(@"{0}/{1}/{2}/", target_path, year, month);
+                        var full_name = string.Format(@"{0}{1}", name, ext);
+                        var new_path = CopyNewPath(path, new_dir, name, ext);
+                        double percentage_done = (i / path_count) * 100;
+                        Console.WriteLine(String.Format("{0:0.00}%-{1}", percentage_done, new_path));
+                    }                    
+                }
+            }
+        }
+
+        private static double GetPathCount(Dictionary<int, Dictionary<int, List<string>>> paths)
+        {
+            double count = 0;
+            foreach(var y in paths.Values)
+            {
+                foreach(var m in y.Values)
+                {
+                    count += m.Count;
+                }
+            }
+            return count;
+        }
+
+        private static string CopyNewPath(string source_path, string new_dir, string name, string ext)
+        {
+            var new_path = new_dir + name + ext;
+            if (Directory.Exists(new_dir))
+            {
+                int index = 1;
+                while (File.Exists(new_path))
+                {
+                    name += string.Format("-duplicate-{0}", index);
+                    new_path = new_dir + name + ext;
+                    index += 1;
+                }
+            }
+            else
+            {
+                Directory.CreateDirectory(new_dir);
+            }
+            File.Copy(source_path, new_path);
+            return new_path;
         }
 
         internal static Dictionary<int,Dictionary<int,List<string>>> GetPaths(string root_path,List<string> file_types)
         {
             var paths = GetFilePaths(root_path, file_types);
-
-
             return OrganizePaths(paths);
         }
 

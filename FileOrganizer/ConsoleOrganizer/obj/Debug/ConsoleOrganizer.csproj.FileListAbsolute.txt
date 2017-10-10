@@ -3,3 +3,4 @@ C:\Users\Tanner\Documents\GitHub\Side-Projects\FileOrganizer\ConsoleOrganizer\bi
 C:\Users\Tanner\Documents\GitHub\Side-Projects\FileOrganizer\ConsoleOrganizer\bin\Debug\ConsoleOrganizer.pdb
 C:\Users\Tanner\Documents\GitHub\Side-Projects\FileOrganizer\ConsoleOrganizer\obj\Debug\ConsoleOrganizer.exe
 C:\Users\Tanner\Documents\GitHub\Side-Projects\FileOrganizer\ConsoleOrganizer\obj\Debug\ConsoleOrganizer.pdb
+C:\Users\Tanner\Documents\GitHub\Side-Projects\FileOrganizer\ConsoleOrganizer\obj\Debug\ConsoleOrganizer.csprojResolveAssemblyReference.cache

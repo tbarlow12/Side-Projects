@@ -11,72 +11,24 @@ namespace LucidChallenge
         static void Main(string[] args)
         {
             var grid = ReadGrid();
-            var longest_path = FindLongestPath(grid);
+            Console.WriteLine(FindLongestPath(grid));
         }
 
         private static int FindLongestPath(int[][] grid)
         {
+            int longest_path = 0;
             for(int i = 0; i < grid.Length; i++)
             {
                 for (int j = 0; j < grid[i].Length; j++)
                 {
-                    Stack<int[]> stack = new Stack<int[]>();
-                    stack.Push(new int[] { i, j });
-                    List<Tuple<int, int>> explored = new List<Tuple<int, int>>();
-                    var longest_path = 0;
-                    var path_length = 1;
-                    while(stack.Count > 0)
-                    {
-                        var coords = stack.Peek();
-                        int row = coords[0];
-                        int col = coords[1];
-
-                        int original_count = stack.Count;
-                        //push neighbors if they satisfy requirement
-                        stack.PushIfSatisfy(grid[row][col], row - 1, col - 1, grid);
-                        stack.PushIfSatisfy(grid[row][col], row - 1, col, grid);
-                        stack.PushIfSatisfy(grid[row][col], row - 1, col + 1, grid);
-                        stack.PushIfSatisfy(grid[row][col], row, col - 1, grid);
-                        stack.PushIfSatisfy(grid[row][col], row, col + 1, grid);
-                        stack.PushIfSatisfy(grid[row][col], row + 1, col - 1, grid);
-                        stack.PushIfSatisfy(grid[row][col], row + 1, col, grid);
-                        stack.PushIfSatisfy(grid[row][col], row + 1, col + 1, grid);
-                        if (stack.Count > original_count)
-                            path_length++;
-                        else
-                        {
-                            stack.Pop();
-                            longest_path = Math.Max(longest_path, path_length);
-                            path_length--;
-                        }
-                        //record biggest length so far
-                    }
+                    Node node = new Node(null, grid[i][j]);
+                    node.AddChildren(grid, i, j);
+                    longest_path = Math.Max(longest_path, node.LongestPath);
+                    int k = 0;
                 }
             }
-            return 0;
+            return longest_path;
         }
-
-        private static bool PushIfSatisfy(this Stack<int[]> stack,int val, int row, int col, int[][] grid)
-        {
-            var coords = new int[] { row, col };
-            if (row >= 0 && row < grid.Length && col >= 0 && col < grid[row].Length && Math.Abs(val - grid[row][col]) >= 3)
-            { 
-                stack.Push(coords);
-                return true;
-            }
-            return false;
-        }
-        private static bool HasPath(this List<List<int>> paths, List<int> path, int newVal)
-        {
-            foreach(List<int> p in paths)
-            {
-                List<int> temp = p.ToList();
-                temp.Add(newVal);
-                if (temp.SequenceEqual(path)) return true;
-            }
-            return false;
-        }
-
         private static int[][] ReadGrid()
         {
             List<int[]> lines = new List<int[]>();
@@ -87,10 +39,54 @@ namespace LucidChallenge
             return lines.ToArray();
         }
     }
-    class Node<T>
+    class Node
     {
-        public List<Node<T>> Nodes { get; set; }
-        public T Value { get; set; }
-    }
+        public Node Parent { get; set; }
+        public List<Node> Children { get; set; }
+        public int Value { get; set; }
+        public Node(Node parent, int val)
+        {
+            Parent = parent;
+            Value = val;
+            Children = new List<Node>();
+        }
+        internal void AddChildren(int[][] grid, int i, int j)
+        {
+            TryAddChild(grid, i - 1, j - 1);
+            TryAddChild(grid, i - 1, j);
+            TryAddChild(grid, i - 1, j + 1);
+            TryAddChild(grid, i, j - 1);
+            TryAddChild(grid, i, j + 1);
+            TryAddChild(grid, i + 1, j - 1);
+            TryAddChild(grid, i + 1, j);
+            TryAddChild(grid, i + 1, j + 1);
+        }
+        public int LongestPath {
+            get
+            {
+                if (Children.Count == 0)
+                    return 1;
+                List<int> maxs = new List<int>();
+                foreach (var child in Children)
+                    maxs.Add(child.LongestPath);
+                return 1 + maxs.Max();
+            }
+        }
 
+        private void TryAddChild(int[][] grid, int i, int j)
+        {
+            if (!(i >= 0 && j >= 0 && i < grid.Length && j < grid[i].Length && Math.Abs(Value - grid[i][j]) >= 3))
+                return;
+            Node tempParent = this.Parent;
+            while (tempParent != null)
+            {
+                if (tempParent.Value == grid[i][j])
+                    return;
+                tempParent = tempParent.Parent;
+            }
+            Node child = new Node(this,grid[i][j]);
+            child.AddChildren(grid, i, j);
+            Children.Add(child);
+        }
+    }
 }
